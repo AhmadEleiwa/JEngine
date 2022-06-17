@@ -52,8 +52,8 @@ public class Cube {
         -0.5f, 0.5f, -0.5f, 0.0f, 1.0f
         };
 
-    public Cube(){        
-        
+    public Cube(){    
+
             model = new Model(EngineController.pushPorgram("defualt"), "model");
 
             buffer = EngineController.pushBuffer("cube");
@@ -70,7 +70,7 @@ public class Cube {
            
     }
     public Cube(int program, String name){        
-        
+
             model = new Model(program, name);
 
             buffer = EngineController.pushBuffer("cube");
@@ -92,11 +92,12 @@ public class Cube {
     public void loadTexture(Texture2D src){
         texture = EngineController.loadTexture(src.getSource());
     }
+
     public void draw(){
         model.sendMatrix();
         glBindTexture(GL_TEXTURE_2D, texture);
         glBindVertexArray(buffer[0]);
         glDrawArrays(GL_TRIANGLES, 0, 36);
-        
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 }

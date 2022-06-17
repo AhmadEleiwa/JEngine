@@ -55,7 +55,7 @@ public class App{
 
         view.lookAt(new Vector3f(0,2,3) ,new Vector3f(0,1,0), new Vector3f(0,1,0));
 
-
+        Lines line = new Lines();
         while(!window.isRunning()){
     
             window.render();
@@ -63,13 +63,16 @@ public class App{
             EngineController.useDefualtProgram();
 
             view.sendMatrix();
+            if(glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS){
+                view.rotate((float)Math.toRadians(1),new Vector3f(0,1,0));
+            }
             proj.sendMatrix();;
-
+            line.draw();
             for(int i=0;i<models.length;i++){
                 models[i].draw();
             }
             window.pollEvent();
-   
+            
         }        
         
         window.cleanUp();

@@ -16,7 +16,7 @@ public class Window {
         this.width = width;
         this.height = height;
         this.title = title;
-        BackGroundColor = new Color(155, 155, 155);
+        BackGroundColor = new Color(120, 125, 145);
         glfwWindowHint(GLFW_VISIBLE, 1);
 
         window = glfwCreateWindow(width, height , title, 0 ,0);
@@ -30,7 +30,7 @@ public class Window {
 
     }
     public void render(){
-        glClearColor((float)BackGroundColor.r, (float)BackGroundColor.g/255, (float)BackGroundColor.b/255, 1.0f);
+        glClearColor((float)BackGroundColor.r/255, (float)BackGroundColor.g/255, (float)BackGroundColor.b/255, 1.0f);
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     }
     public void pollEvent(){
