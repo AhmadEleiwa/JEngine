@@ -11,7 +11,8 @@ public class Cube {
 
     private int[] buffer= new int[2];
     public Model model;
-    public int texture;
+    private int texture;
+    public String name = "cube";
 
     private final float[] verticesCube={
         -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
@@ -53,9 +54,7 @@ public class Cube {
         };
 
     public Cube(){    
-
             model = new Model(EngineController.pushPorgram("defualt"), "model");
-
             buffer = EngineController.pushBuffer("cube");
             
             glBindVertexArray(buffer[0]);
@@ -87,10 +86,10 @@ public class Cube {
            
     }
     public void loadTexture(String src){
-        texture =  EngineController.loadTexture(src);
+        this.texture =  EngineController.loadTexture(src);
     }
-    public void loadTexture(Texture2D src){
-        texture = EngineController.loadTexture(src.getSource());
+    public void loadTexture(Texture2D texture){
+        this.texture = EngineController.loadTexture(texture.getSource());
     }
 
     public void draw(){

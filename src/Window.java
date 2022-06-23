@@ -2,11 +2,13 @@
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-
-
+import org.lwjgl.glfw.GLFWCursorPosCallbackI;
+import org.lwjgl.glfw.GLFWKeyCallbackI;
+import org.lwjgl.glfw.GLFWMouseButtonCallbackI;
 import org.lwjgl.opengl.GL;
 
 public class Window {
+
     private int width; 
     private int height;
     private String title;
@@ -27,6 +29,9 @@ public class Window {
 		glfwShowWindow(window);
         GL.createCapabilities();
         glEnable(GL_DEPTH_TEST);
+
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        glfwSetCursorPos(window, 50, 50);
 
     }
     public void render(){
@@ -70,5 +75,54 @@ public class Window {
     }
     public void setBackGroundColor(Color backGroundColor) {
         BackGroundColor = backGroundColor;
+    }
+
+
+    public boolean keyPressed(int key){
+        return glfwGetKey(window, key) == GLFW_PRESS;
+    }
+    public boolean mouseButtonClicked(int button){
+        return glfwGetMouseButton(window, button) == GLFW_PRESS;
+         
+    }
+    // listeners  
+
+
+    public void addKeyListener(KeyListener keyListener){
+        glfwSetKeyCallback(window,new  GLFWKeyCallbackI(){
+            @Override
+            public void invoke(long window, int key, int scancode, int action, int mods) {
+                if(action == 1)// key pressed
+                    keyListener.keyPressed(key);
+                if(action == 0)//key released
+                    keyListener.keyReleased(key);
+                if (action == 1 && mods > 0 )
+                    keyListener.modKey(mods, key);
+            }
+
+        });
+    }
+    public void addMouseListener(MouseListener mouseListener){
+        glfwSetMouseButtonCallback(window, new GLFWMouseButtonCallbackI() {
+            @Override
+            public void invoke(long window, int button, int action, int mods) {
+                if(action == 1 )// mouse pressed 
+                    mouseListener.mousePressed(button);
+                if(action == 0)
+                    mouseListener.mouseReleased(button);
+            }
+            
+        });
+    }
+    public void addMouseMotionListener(MouseMotionListener mouseMotionListener){
+
+        glfwSetCursorPosCallback(window, new GLFWCursorPosCallbackI(){
+            @Override
+            public void invoke(long window, double xpos, double ypos) {
+                mouseMotionListener.mouseMove(xpos, ypos);
+            }
+
+        });
+  
     }
 }

@@ -10,7 +10,7 @@ public class Lines {
     
     private int[] buffer= new int[2];
     public Model model;
-    public int texture;
+    public String name = "lines";
 
     private final float[] verticesCube={
         0,0,-5000,1,0,0,
@@ -37,12 +37,8 @@ public class Lines {
 
             glVertexAttribPointer(1, 3, GL_FLOAT, false, 6*4, 3*4);
             glEnableVertexAttribArray(1);
-
-
            
     }
-
-
 
     public void draw(){
         model.sendMatrix();

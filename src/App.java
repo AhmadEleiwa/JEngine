@@ -56,18 +56,63 @@ public class App{
         view.lookAt(new Vector3f(0,2,3) ,new Vector3f(0,1,0), new Vector3f(0,1,0));
 
         Lines line = new Lines();
+
+        window.addMouseMotionListener( new MouseMotionListener() {
+            @Override
+            public void mouseMove(double x, double y) {
+            }
+            
+        });
+        window.addMouseListener(new MouseListener() {
+            @Override
+            public void mousePressed(int button) {
+                // TODO Auto-generated method stub
+                // System.out.println("pressed");
+                
+            }
+
+            @Override
+            public void mouseReleased(int button) {
+                // System.out.println("released");
+                
+            }
+            
+        });
+        window.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyPressed(int key) {
+                
+            }
+
+            @Override
+            public void keyReleased(int key) {
+                
+            }
+
+            @Override
+            public void modKey(int mod, int key) {
+
+            }
+
+            
+        });
         while(!window.isRunning()){
     
             window.render();
 
             EngineController.useDefualtProgram();
-
-            view.sendMatrix();
-            if(glfwGetKey(window.getWindow(), GLFW_KEY_Q) == GLFW_PRESS){
-                view.rotate((float)Math.toRadians(1),new Vector3f(0,1,0));
+            if(window.keyPressed(GLFW_KEY_W)){
+                view.translate(new Vector3f(0,0,0.5f));
             }
+            if(window.mouseButtonClicked(GLFW_MOUSE_BUTTON_1)){
+                view.translate(new Vector3f(0,0,0.5f));
+            }
+            view.sendMatrix();
+
             proj.sendMatrix();;
             line.draw();
+            
             for(int i=0;i<models.length;i++){
                 models[i].draw();
             }
