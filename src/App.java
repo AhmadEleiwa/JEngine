@@ -1,8 +1,6 @@
 import static org.lwjgl.glfw.GLFW.*;
 import java.util.Random;
 
-import org.joml.Matrix4f;
-import org.joml.Vector2d;
 import org.joml.Vector3f;
 
 
