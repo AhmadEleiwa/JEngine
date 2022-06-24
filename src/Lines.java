@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL30.*;
 public class Lines {
     
     private int[] buffer= new int[2];
-    public Model model;
+    public Mesh model;
     public String name = "lines";
 
     private final float[] verticesCube={
@@ -23,7 +23,7 @@ public class Lines {
 
     public Lines(){    
 
-            model = new Model(EngineController.pushPorgram("defualt"), "model");
+            model = new Mesh(EngineController.pushPorgram("defualt"), "model");
 
             buffer = EngineController.pushBuffer("lines");
             

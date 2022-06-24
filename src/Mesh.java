@@ -2,12 +2,13 @@ import org.joml.Matrix4f;
 import static org.lwjgl.opengl.GL20.*;
 
 
-public class Model extends Matrix4f{
+public class Mesh extends Matrix4f{
     private float[] vertices;
     private int program ;
     private String name;
     private int model;
-    public Model(int program, String name ){
+    private int[] buffer = new int[2];
+    public Mesh(int program, String name ){
         super();
         this.name = name;
         this.program = program;
@@ -17,7 +18,7 @@ public class Model extends Matrix4f{
         vertices = new float[16];
         update();
     }
-    private void update(){
+    public void update(){
         get(vertices);
     }
     public float[] get() {
@@ -34,5 +35,12 @@ public class Model extends Matrix4f{
         update();
         glUniformMatrix4fv(this.model, false, this.vertices);
     }
-    
+
+    public void setBuffer(int[] buffer) {
+        this.buffer[0] = buffer[0];
+        this.buffer[1] = buffer[1];
+    }
+    public int[] getBuffer(){
+        return buffer;
+    }
 }

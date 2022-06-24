@@ -8,7 +8,14 @@ public class EngineController {
     private static ArrayList<BufferLoader> loaders =new ArrayList<>();
     private static ArrayList<Texture2D> texture2ds = new ArrayList<>();
     private static ArrayList<ShaderProgram> programs = new ArrayList<>();
+    private static ArrayList<Long> windows = new ArrayList<>();
 
+    public static  void addWindow(long window){
+        windows.add(window);
+    }
+    public static long getWindow(int index){
+        return windows.get(index);
+    }
     public static int[] pushBuffer(String name){
         for(int i=0; i<loaders.size(); i++){
             if(loaders.get(i).getName() == name){

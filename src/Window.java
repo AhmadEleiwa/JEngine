@@ -22,16 +22,17 @@ public class Window {
         glfwWindowHint(GLFW_VISIBLE, 1);
 
         window = glfwCreateWindow(width, height , title, 0 ,0);
+        EngineController.addWindow(window);
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
-
+        
 		// Make the window visible
 		glfwShowWindow(window);
         GL.createCapabilities();
         glEnable(GL_DEPTH_TEST);
 
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-        glfwSetCursorPos(window, 50, 50);
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        glfwSetCursorPos(window, width/2, height/2);
 
     }
     public void render(){
