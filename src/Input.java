@@ -15,7 +15,6 @@ public class Input {
             public void invoke(long window, double xpos, double ypos) {
                 pos[0] = xpos;
                 pos[1] = ypos;
-                System.out.println(pos[0]);
             }
 
         });

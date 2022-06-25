@@ -33,6 +33,7 @@ public class Window {
 
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         glfwSetCursorPos(window, width/2, height/2);
+        
 
     }
     public void render(){

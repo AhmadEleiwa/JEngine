@@ -39,10 +39,16 @@ public class Lines {
             glEnableVertexAttribArray(1);
            
     }
+    private void update(){
+        
+        glUniform2f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "colorFromIn"),1,0);
+        glUniform2f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "textureEnable"),0, 0);
 
+    }
     public void draw(){
         model.sendMatrix();
-        // glBindTexture(GL_TEXTURE_2D, texture);
+        update();
+
         glBindVertexArray(buffer[0]);
         glDrawArrays(GL_LINES, 0, 6);
         
