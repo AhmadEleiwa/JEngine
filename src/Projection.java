@@ -7,13 +7,18 @@ public class Projection extends Matrix4f {
     private int program ;
     private String name;
     private int model;
+    private float zfar;
+    private float zNear;
+    private float aspect;
     public Projection( float aspect){
         super();
         this.name = "projection";
         this.program = EngineController.pushPorgram("defualt");
-
         this.model = glGetUniformLocation(program, name);
-        perspective((float)Math.toRadians(45f), aspect,0.1f, 100f);
+        this.zfar = 500;
+        this.zNear = 0.1f;
+        this.aspect = aspect;
+        this.perspective((float)Math.toRadians(45f), aspect,zNear, zfar);
         vertices = new float[16];
         update();
     }
@@ -21,9 +26,12 @@ public class Projection extends Matrix4f {
         super();
         this.name = name;
         this.program = program;
-
         this.model = glGetUniformLocation(program, name);
-        perspective((float)Math.toRadians(45f), aspect,0.1f, 100f);
+        this.zfar = 500;
+        this.zNear = 0.1f;
+        this.aspect = aspect;
+
+        perspective((float)Math.toRadians(45f), aspect,zNear, zfar);
         vertices = new float[16];
         update();
     }
@@ -43,6 +51,21 @@ public class Projection extends Matrix4f {
     public void sendMatrix(){
         update();
         glUniformMatrix4fv(this.model, false, this.vertices);
+    }
+    public float getZfar() {
+        return zfar;
+    }
+    public void setZfar(float zfar) {
+        this.zfar = zfar;
+        this.perspective((float)Math.toRadians(45f), aspect,zNear, zfar);
+    }
+    public float getzNear() {
+        return zNear;
+    }
+    public void setzNear(float zNear) {
+        this.zNear = zNear;
+        this.perspective((float)Math.toRadians(45f), aspect,zNear, zfar);
+
     }
 
 }

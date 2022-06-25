@@ -89,7 +89,7 @@ public class Cube {
     public void update(){
         model.setTranslation(transform.position);
         model.setRotationXYZ(transform.rotation.x, transform.rotation.y, transform.rotation.z);
-        // model.scale(new Vector3f(transform.scale));
+        model.scale(new Vector3f(transform.scale));
 
 
         glUniform2f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "colorFromIn"),0,0);

@@ -19,7 +19,7 @@ public class App{
             System.out.println("Failed to init glfw");
         } 
         
-        int winWidth = 1280 , winHeight =  720;
+        int winWidth = 1900 , winHeight =  1200;
         String title = "My title";
         Window window = new Window(winWidth, winHeight, title);
  
@@ -38,21 +38,9 @@ public class App{
   
         Random rand = new Random();
         Cube[] models = new Cube[1600];
-        int[] ls = new int[1600];
         int c=0;
         for(int i=0; i<40; i++){
             for(int j=0; j<40; j++){
-                int y  = 1;
-                int r = rand.nextInt(30);
-                if(r  > 0)
-                    y = 0;
-                int rc  = rand.nextInt(20);
-                if(rc > 18)
-                    ls[c] = 0;
-                else if(rc >12)
-                    ls[c] = 1;
-                else
-                    ls[c] = 2;
                 models[c] = new Cube();
                 models[c].transform.scale = new Vector3f(0.2f,0.3f,0.2f);
                 models[c++].transform.position = new Vector3f(rand.nextInt(1000) -rand.nextInt(1000) , -rand.nextInt(50) ,rand.nextInt(1000) -rand.nextInt(1000));
@@ -69,7 +57,7 @@ public class App{
         models[0].transform.scale = new Vector3f(3,3,3);
         models[0].loadTexture(tex[1]);
 
-        models[1].transform.scale = new Vector3f(10,10,10);
+        models[1].transform.scale = new Vector3f(100,100,100);
         models[1].color = new Color(200, 80, 90);
         models[1].loadTexture(tex[1]);
 
