@@ -22,6 +22,10 @@ public class Window {
     private long window;
     private Color BackGroundColor;
     public Window(int width, int height, String title) {
+        if(!glfwInit()){
+            System.out.println("Failed to init glfw");
+        } 
+        
         this.width = width;
         this.height = height;
         this.title = title;

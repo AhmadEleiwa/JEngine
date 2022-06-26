@@ -1,7 +1,4 @@
-
-import static org.lwjgl.glfw.GLFW.*;
 import java.util.Random;
-
 
 
 import org.joml.Vector3f;
@@ -25,10 +22,7 @@ public class App{
     }
 
     void app(){
-        if(!glfwInit()){
-            System.out.println("Failed to init glfw");
-        } 
-        
+
         int winWidth = 1900 , winHeight =  1200;
         String title = "My title";
         Window window = new Window(winWidth, winHeight, title);
