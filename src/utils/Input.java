@@ -1,7 +1,10 @@
+package utils;
 // import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.glfw.GLFW.*;
 
 import org.lwjgl.glfw.GLFWCursorPosCallbackI;
+
+import Engine.EngineController;
 
 public class Input {
     private static double[] pos = new double[2];

@@ -1,4 +1,8 @@
+package Engine;
 import java.util.ArrayList;
+
+import utils.Texture2D;
+
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
@@ -19,12 +23,12 @@ public class EngineController {
     public static int[] pushBuffer(String name){
         for(int i=0; i<loaders.size(); i++){
             if(loaders.get(i).getName() == name){
-                return new int[]{loaders.get(i).getVAO(),loaders.get(i).getVBO()};
+                return new int[]{loaders.get(i).getVAO(),loaders.get(i).getVBO(),loaders.get(i).getVEO()};
             }
         }
         BufferLoader l = new BufferLoader(name,glGenVertexArrays(), glGenBuffers());
         loaders.add(l);
-        return new int[]{l.getVAO(), l.getVBO()};
+        return new int[]{l.getVAO(), l.getVBO(),l.getVEO()};
 
     }
     public static int loadTexture(String path){
@@ -41,8 +45,8 @@ public class EngineController {
     public static int pushPorgram(String name){
         if(programs.size() == 0){
             ShaderProgram defualtProgram = new ShaderProgram("defualt");
-            defualtProgram.add(new Shader(GL_VERTEX_SHADER, "src/vertexShaderSource.vs"));
-            defualtProgram.add(new Shader(GL_FRAGMENT_SHADER, "src/fragShaderSource.fs"));
+            defualtProgram.add(new Shader(GL_VERTEX_SHADER, "src/Shaders/vertexShaderSource.vs"));
+            defualtProgram.add(new Shader(GL_FRAGMENT_SHADER, "src/Shaders/fragShaderSource.fs"));
             defualtProgram.link();
             programs.add(defualtProgram);
         }

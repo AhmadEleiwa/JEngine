@@ -1,4 +1,8 @@
+package objects;
 import org.joml.Matrix4f;
+
+import Engine.EngineController;
+
 import static org.lwjgl.opengl.GL20.*;
 
 
@@ -57,13 +61,17 @@ public class Projection extends Matrix4f {
     }
     public void setZfar(float zfar) {
         this.zfar = zfar;
+        this.identity();
         this.perspective((float)Math.toRadians(45f), aspect,zNear, zfar);
+        
     }
     public float getzNear() {
         return zNear;
     }
     public void setzNear(float zNear) {
         this.zNear = zNear;
+        this.identity();
+
         this.perspective((float)Math.toRadians(45f), aspect,zNear, zfar);
 
     }

@@ -1,3 +1,4 @@
+package objects;
 // import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -6,6 +7,12 @@ import org.lwjgl.glfw.GLFWCursorPosCallbackI;
 import org.lwjgl.glfw.GLFWKeyCallbackI;
 import org.lwjgl.glfw.GLFWMouseButtonCallbackI;
 import org.lwjgl.opengl.GL;
+
+import Engine.EngineController;
+import utils.Color;
+import utils.KeyListener;
+import utils.MouseListener;
+import utils.MouseMotionListener;
 
 public class Window {
 

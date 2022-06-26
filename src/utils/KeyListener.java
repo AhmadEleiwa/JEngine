@@ -1,3 +1,4 @@
+package utils;
 
 public interface KeyListener {
     public void keyPressed(int key);

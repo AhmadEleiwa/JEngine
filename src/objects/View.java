@@ -1,9 +1,14 @@
+package objects;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+
+import Engine.EngineController;
+import utils.Input;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 
-public class View{
+public class View extends GameObject{
 
     private static Vector3f addVecs(Vector3f v1 , Vector3f v2){
         Vector3f res = new Vector3f();
@@ -14,7 +19,6 @@ public class View{
         return res;
     }
 
-    public Mesh model;
     public Vector3f cameraPos;
     public Vector3f cameraFront;
     public Vector3f cameraUp;
@@ -22,7 +26,7 @@ public class View{
     public Vector2f sensitivity;
     public float mouseSpeed;
     public Vector3f oldPos;
-
+    private boolean cameraIoMovement = false;
     private boolean first;
 
     public View(){
@@ -43,7 +47,7 @@ public class View{
         model.update();
     }
 
-    public void update(){
+    private void camereMovment(){
         double x = Input.getMouse()[0];
         double y = Input.getMouse()[1];
         
@@ -67,8 +71,6 @@ public class View{
         cameraFront.z =  (float)(Math.sin(Math.toRadians(oldPos.x)) * Math.cos(Math.toRadians(oldPos.y))); 
 
 
-        model.identity();
-        model.lookAt(cameraPos, View.addVecs(cameraPos,cameraFront), cameraUp);
 
         if(Input.getKetDown(GLFW_KEY_W)){
             cameraPos.add(new Vector3f(cameraFront.x * mouseSpeed,cameraFront.y * mouseSpeed,cameraFront.z * mouseSpeed));
@@ -89,6 +91,16 @@ public class View{
             cameraPos.sub(veci.x * mouseSpeed, veci.y * mouseSpeed, veci.z * mouseSpeed);
         }  
 
+    } 
+    
+    @Override
+    public void update(){
+
+        model.identity();
+        model.lookAt(cameraPos, View.addVecs(cameraPos,cameraFront), cameraUp);
+       if(cameraIoMovement){
+           camereMovment();
+       }
     }
 
     public float[] get() {
@@ -101,5 +113,13 @@ public class View{
     public void render(){
         update();
         model.sendMatrix();;
+    }
+
+    public boolean isCameraIoMovement() {
+        return cameraIoMovement;
+    }
+
+    public void setCameraIoMovement(boolean cameraIoMovement) {
+        this.cameraIoMovement = cameraIoMovement;
     }
 }
