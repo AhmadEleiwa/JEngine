@@ -9,8 +9,12 @@ uniform vec2 textureEnable ;
 
 void main()
 {
+
+    vec4 texColor  = texture(ourTexture, TexCoord);
+    if(texColor.a < 0.1) // if alpha is less than 0.1 so remove the pixel 
+        discard;
     if(textureEnable.x == 1)
-        FragColor =  vec4(ourColor,1)*texture(ourTexture, TexCoord);
+        FragColor =  vec4(ourColor,1)*texColor;
     else
         FragColor =  vec4(ourColor,1);
 

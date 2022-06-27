@@ -1,9 +1,10 @@
 import java.util.Random;
 
-
+import org.lwjgl.glfw.GLFW;
 import org.joml.Vector3f;
 
 import Engine.EngineController;
+import objects.Circle;
 import objects.Cube;
 import objects.Lines;
 import objects.Projection;
@@ -12,8 +13,8 @@ import objects.Sprite;
 import objects.View;
 import objects.Window;
 import utils.Color;
+import utils.Input;
 import utils.Texture2D;
-
 
 public class App{
 
@@ -27,15 +28,16 @@ public class App{
         String title = "My title";
         Window window = new Window(winWidth, winHeight, title);
  
-        Texture2D[] tex = new Texture2D[4];
+        Texture2D[] tex = new Texture2D[5];
         
         tex[0] = new Texture2D("src/ss.jpg");
         tex[1] = new Texture2D("src/lava.jpg");
         tex[2] = new Texture2D("src/player.png");
         tex[3] = new Texture2D("src/dirt_0.png");
+        tex[4] = new Texture2D("src/ball.png");
 
-
-
+        Circle circle = new Circle();
+        circle.loadTexture(tex[4]);
     
         Projection proj = new Projection( (float)winWidth/(float)winHeight);
     
@@ -45,6 +47,8 @@ public class App{
         Random rand = new Random();
         Rectangle[] models = new Rectangle[1600];
         int c=0;
+        int x = 120;
+        window.setBackGroundColor(new Color(x, x, x));
         for(int i=0; i<40; i++){
             for(int j=0; j<40; j++){
                 models[c] = new Rectangle();
@@ -56,9 +60,7 @@ public class App{
         }
 
   
-        float ci = 0;
-        float radius = 10;
-
+ 
         Cube ml = new Cube();
         ml.color = new Color(180, 60, 60);
         ml.transform.scale = new Vector3f(3,3,3);
@@ -66,14 +68,13 @@ public class App{
 
 
         Lines line = new Lines();
-        view.setCameraIoMovement(true);
-        view.cameraPos = new Vector3f(0,0,5);
-        Sprite s = new Sprite(tex[0]);
-        Sprite rect = new Sprite(tex[3]);
-        Sprite s2 = new Sprite(tex[2]);
-        s2.transform.position = new Vector3f(-2,0,0);
-        s2.transform.scale = new Vector3f(-1,1,1);
-        rect.transform.position = new Vector3f(2,0,0);
+        // view.setCameraIoMovement(true);
+
+        Sprite sprite = new Sprite(tex[4]);
+        Cube cube = new Cube();
+        cube.loadTexture(tex[3]);
+        cube.transform.position = new Vector3f(0,0,-1);   
+        view.cameraPos.z = 10;
         while(!window.isRunning()){
     
             window.render();
@@ -84,18 +85,19 @@ public class App{
             view.render();
 
             proj.sendMatrix();
-            line.draw(); 
-            ml.draw();
+          
+            sprite.transform.rotation = new Vector3f(0,0,0);
+            sprite.draw();
+            cube.draw();
+            line.draw();
+            if(Input.getKeyDown(GLFW.GLFW_KEY_D)){
+                sprite.transform.position.x += 0.08; 
+            }
+            if(Input.getKeyDown(GLFW.GLFW_KEY_A)){
+                sprite.transform.position.x -= 0.08; 
+            }
 
-            ml.transform.position = new Vector3f(radius * (float)Math.sin(ci*1.2),0,radius* (float)Math.cos(ci*1.2f));
-        
-            rect.draw();
-            
-            s.draw();
-            s2.draw();
-            int x = rand.nextInt(2);
-            window.setBackGroundColor(new Color(x, x, x));
-            ci += 0.01f;
+            view.cameraPos.x =  sprite.transform.position.x ;
 
             window.pollEvent();
             

@@ -42,7 +42,6 @@ public class GameObject {
         this.texture =  EngineController.loadTexture(src);
     }
     public void loadTexture(Texture2D texture){
-        System.out.println(texture.getWidth());
         this.texture = EngineController.loadTexture(texture.getSource());
     }
 }

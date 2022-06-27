@@ -41,7 +41,9 @@ public class EngineController {
         texture2ds.add(l);
         return l.getTexture();
     }
-
+    public static void loadTexture(Texture2D texture){
+        texture2ds.add(texture);
+    }
     public static int pushPorgram(String name){
         if(programs.size() == 0){
             ShaderProgram defualtProgram = new ShaderProgram("defualt");

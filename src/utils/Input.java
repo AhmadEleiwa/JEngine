@@ -23,10 +23,10 @@ public class Input {
         });
         return pos;
     }
-    public static boolean getKetDown(int key){
+    public static boolean getKeyDown(int key){
         return glfwGetKey(EngineController.getWindow(0), key) == GLFW_PRESS;
     }
-    public static boolean getKetUp(int key){
+    public static boolean getKeyUp(int key){
         return glfwGetKey(EngineController.getWindow(0), key) == GLFW_RELEASE;
     }
 

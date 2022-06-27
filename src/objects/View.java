@@ -28,7 +28,6 @@ public class View extends GameObject{
     public Vector3f oldPos;
     private boolean cameraIoMovement = false;
     private boolean first;
-
     public View(){
 
         model = new Mesh(EngineController.pushPorgram("defualt"), "view");
@@ -43,7 +42,6 @@ public class View extends GameObject{
 
         mouseSpeed  = 0.1f;
         first = true;
-
         model.update();
     }
 
@@ -61,35 +59,40 @@ public class View extends GameObject{
         float dy = (float) (y - oldPos.y);
         oldPos.x = dx*sensitivity.x;
         oldPos.y = dy*sensitivity.y;
+
+    
+         
         if(oldPos.y > 89.0f)
             oldPos.y = 89.0f;
         if(oldPos.y < -89.0f)
             oldPos.y = -89.0f;
 
-        cameraFront.x =  (float)(Math.cos(Math.toRadians(oldPos.x)) * Math.cos(Math.toRadians(oldPos.y))); 
+
+        cameraFront.x =  (float)(Math.cos(Math.toRadians(oldPos.x)) * Math.cos(Math.toRadians(oldPos.y)))  ; 
         cameraFront.y =  -(float) Math.sin(Math.toRadians(oldPos.y)); 
-        cameraFront.z =  (float)(Math.sin(Math.toRadians(oldPos.x)) * Math.cos(Math.toRadians(oldPos.y))); 
+        cameraFront.z =  (float)(Math.sin(Math.toRadians(oldPos.x)) * Math.cos(Math.toRadians(oldPos.y))) ; 
 
+        
 
-
-        if(Input.getKetDown(GLFW_KEY_W)){
+        if(Input.getKeyDown(GLFW_KEY_W)){
             cameraPos.add(new Vector3f(cameraFront.x * mouseSpeed,cameraFront.y * mouseSpeed,cameraFront.z * mouseSpeed));
     
         }
-        if( Input.getKetDown(GLFW_KEY_S)){
+        if( Input.getKeyDown(GLFW_KEY_S)){
             cameraPos.sub(new Vector3f(cameraFront.x * mouseSpeed,cameraFront.y * mouseSpeed,cameraFront.z * mouseSpeed));
 
         }
-        if(Input.getKetDown(GLFW_KEY_A)){
+        if(Input.getKeyDown(GLFW_KEY_A)){
             Vector3f veci = new Vector3f(cameraUp);
             veci.cross(cameraFront);
             cameraPos.add(veci.x * mouseSpeed, veci.y * mouseSpeed, veci.z * mouseSpeed);
         }
-        if(Input.getKetDown(GLFW_KEY_D)){
+        if(Input.getKeyDown(GLFW_KEY_D)){
             Vector3f veci = new Vector3f(cameraUp);
             veci.cross(cameraFront);
             cameraPos.sub(veci.x * mouseSpeed, veci.y * mouseSpeed, veci.z * mouseSpeed);
         }  
+        
 
     } 
     
