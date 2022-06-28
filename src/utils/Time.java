@@ -2,7 +2,6 @@ package utils;
 import org.lwjgl.glfw.GLFW;
 
 
-
 public class Time {
     private  double oldTime  = 0;
 
@@ -22,8 +21,6 @@ public class Time {
         }
         return time -  getTime();
     }
-
-
 
     public static double deltaTime(){
         return GLFW.glfwGetTime();

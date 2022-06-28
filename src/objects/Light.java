@@ -85,6 +85,7 @@ public class Light extends GameObject{
         model.scale(new Vector3f(transform.scale));
 
         glUniform3f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "lightPos"), transform.position.x,transform.position.y,transform.position.z);
+        glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "a"),color.a);
 
         glUniform3f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "lightColor"), (float)color.r/255, (float)color.g/255, (float)color.b/255);
 

@@ -44,8 +44,7 @@ public class App{
     
         View view = new View();
 
-        int x = 120;
-        window.setBackGroundColor(new Color(x, x, x));
+        window.setBackGroundColor(new Color(125, 125, 164));
 
  
  
@@ -56,11 +55,16 @@ public class App{
 
         Light l = new Light();
         l.transform.position = new Vector3f(2,8,3);
-        l.color = new Color(220, 220, 200);
-
-        Cube cube = new Cube();
-        cube.color = new Color(144, 120, 240);
-
+        l.color = new Color(240, 240, 240);
+        Random rand =new Random();
+        Cube[] cube = new Cube[100];
+        for(int i=0; i<10; i++){
+            for(int j=0 ;j<10; j++){
+                cube[(i*10)+j] = new Cube();
+                cube[(i*10)+j].transform.position = new Vector3f(i, rand.nextInt(2), j);
+            }
+        }
+  
         view.cameraPos.y = 7;
         view.cameraPos.x = 0;
         view.cameraPos.z = 15;
@@ -84,14 +88,19 @@ public class App{
 
             view.render();
             proj.sendMatrix();
-            cube.draw();
+            for(int i=0; i<10; i++){
+                for(int j=0 ;j<10; j++){
+                    cube[(i*10)+j].draw();;
+                }
+            }
             line.draw();
+
 
 
             l.draw();
             
 
-
+    
             window.pollEvent();
             
         }        

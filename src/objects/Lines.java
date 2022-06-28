@@ -61,6 +61,8 @@ public class Lines extends GameObject{
         model.scale(new Vector3f(transform.scale));
         glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "lightOn"),0);
         glUniform2f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "colorFromIn"),1,0);
+        glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "a"),color.a);
+        glUniform2f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "textureEnable"),0,0);
 
 
     }

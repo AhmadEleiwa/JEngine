@@ -60,18 +60,15 @@ public class View extends GameObject{
         oldPos.x = dx*sensitivity.x;
         oldPos.y = dy*sensitivity.y;
 
-    
          
         if(oldPos.y > 89.0f)
             oldPos.y = 89.0f;
         if(oldPos.y < -89.0f)
             oldPos.y = -89.0f;
-
-
         cameraFront.x =  (float)(Math.cos(Math.toRadians(oldPos.x)) * Math.cos(Math.toRadians(oldPos.y)))  ; 
         cameraFront.y =  -(float) Math.sin(Math.toRadians(oldPos.y)); 
         cameraFront.z =  (float)(Math.sin(Math.toRadians(oldPos.x)) * Math.cos(Math.toRadians(oldPos.y))) ; 
-
+        
         
 
         if(Input.getKeyDown(GLFW_KEY_W)){

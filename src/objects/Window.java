@@ -25,7 +25,6 @@ public class Window {
         if(!glfwInit()){
             System.out.println("Failed to init glfw");
         } 
-        
         this.width = width;
         this.height = height;
         this.title = title;

@@ -30,4 +30,14 @@ public class Input {
         return glfwGetKey(EngineController.getWindow(0), key) == GLFW_RELEASE;
     }
 
+    public static boolean getMouseButtonDown(int key){
+        return glfwGetMouseButton(EngineController.getWindow(0), key) == GLFW_PRESS;
+    }
+
+    public static boolean getMouseButtonUP(int key){
+        return glfwGetMouseButton(EngineController.getWindow(0), key) == GLFW_RELEASE;
+        // glfwCreateCursor(new GLFWImage(""), xhot, yhot)
+    }
+
+
 }
