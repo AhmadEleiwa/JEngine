@@ -15,11 +15,14 @@ import utils.Transform;
 
 
 public class Rectangle extends GameObject{
+    
     private final float[] verteics={
         -0.5f, -0.5f, 0f, 0.0f, 0.0f,
         0.5f, -0.5f, 0f, -1.0f, 0.0f,
-        0.5f, 0.5f, 0f, -1.0f, -1.0f,
-        -0.5f, 0.5f, 0, 0f, -1.0f,
+        0.5f, 0.5f, 0f,  -1.0f, -1.0f,
+        0.5f, 0.5f, 0f,  -1.0f, -1.0f,
+        -0.5f, 0.5f, 0f,  0.0f, -1.0f,
+        -0.5f, -0.5f, 0f, 0.0f, 0.0f,
     };
     public Rectangle(){    
            
@@ -38,6 +41,8 @@ public class Rectangle extends GameObject{
 
         glVertexAttribPointer(2, 2, GL_FLOAT, false, 5*4,  3 * 4);
         glEnableVertexAttribArray(2); 
+
+
         texture = 0;
     }
 
@@ -48,7 +53,7 @@ public class Rectangle extends GameObject{
         model.sendMatrix();
 
         glBindVertexArray(model.getBuffer()[0]);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 

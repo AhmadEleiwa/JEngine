@@ -19,11 +19,19 @@ public class Sprite extends GameObject {
         float wbyh =(float)tex.getWidth() / (float)tex.getHeight(); 
         float hbyw =(float)tex.getHeight() / (float)tex.getWidth() ; 
     
-        float [] verteics = {
+        // float [] verteics = {
+        //     -0.5f*wbyh, -0.5f*hbyw, 0f, 0.0f, 0.0f,
+        //     0.5f*wbyh, -0.5f*hbyw, 0f, -1.0f, 0.0f,
+        //     0.5f*wbyh, 0.5f*hbyw, 0f, -1.0f, -1.0f,
+        //     -0.5f*wbyh, 0.5f*hbyw, 0, 0f, -1.0f,
+        // };
+        float[] verteics={
             -0.5f*wbyh, -0.5f*hbyw, 0f, 0.0f, 0.0f,
             0.5f*wbyh, -0.5f*hbyw, 0f, -1.0f, 0.0f,
-            0.5f*wbyh, 0.5f*hbyw, 0f, -1.0f, -1.0f,
-            -0.5f*wbyh, 0.5f*hbyw, 0, 0f, -1.0f,
+            0.5f*wbyh, 0.5f*hbyw, 0f,  -1.0f, -1.0f,
+            0.5f*wbyh, 0.5f*hbyw, 0f,  -1.0f, -1.0f,
+            -0.5f*wbyh, 0.5f*hbyw, 0f,  0.0f, -1.0f,
+            -0.5f*wbyh, -0.5f*hbyw, 0f, 0.0f, 0.0f,
         };
         this.name = tex.getSource();
 
@@ -49,7 +57,7 @@ public class Sprite extends GameObject {
         model.sendMatrix();
 
         glBindVertexArray(model.getBuffer()[0]);
-        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 

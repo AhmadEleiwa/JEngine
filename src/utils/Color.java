@@ -4,8 +4,8 @@ public class Color {
     public int r;
     public int g;
     public int b;
-    public int a;
-    public Color(int r, int g, int b, int a) {
+    public float a;
+    public Color(int r, int g, int b, Float a) {
         this.r = r;
         this.g = g;
         this.b = b;
@@ -16,12 +16,14 @@ public class Color {
         this.r = r;
         this.g = g;
         this.b = b;
+        this.a = 1;
         check();
     }
     public void setColor(int r, int g, int b){
         this.r = r;
         this.g = g;
         this.b = b;
+        this.a = 1;
         check();
     }
     private void check(){

@@ -20,12 +20,17 @@ public class GameObject {
     public Transform transform;
     public Color color;
 
+    public void enableLight(){
+        glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "lightOn"),1);
+
+    }
     public void update(){
         model.setTranslation(transform.position);
         model.setRotationXYZ(transform.rotation.x, transform.rotation.y, transform.rotation.z);
         model.scale(new Vector3f(transform.scale));
 
 
+        glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "a"),color.a);
         glUniform2f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "colorFromIn"),0,0);
 
         int loc = glGetUniformLocation(EngineController.pushPorgram("defualt"), "color");
@@ -36,6 +41,8 @@ public class GameObject {
             glUniform2f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "textureEnable"),1, 0);
             glBindTexture(GL_TEXTURE_2D, texture);
         }
+
+        glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "lightOn"),0);
         
     }
     public void loadTexture(String src){
@@ -44,4 +51,9 @@ public class GameObject {
     public void loadTexture(Texture2D texture){
         this.texture = EngineController.loadTexture(texture.getSource());
     }
+
+    public void draw(){
+
+    }
+
 }
