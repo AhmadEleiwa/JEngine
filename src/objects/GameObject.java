@@ -45,6 +45,9 @@ public class GameObject {
         glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "lightOn"),0);
         
     }
+    public void loadTexture(int texture){
+        this.texture =  texture;
+    }
     public void loadTexture(String src){
         this.texture =  EngineController.loadTexture(src);
     }

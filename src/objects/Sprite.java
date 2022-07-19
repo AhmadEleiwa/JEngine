@@ -7,24 +7,18 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
 import Engine.EngineController;
+import utils.Animation;
 import utils.Color;
 import utils.Texture2D;
 import utils.Transform;
 
 
-public class Sprite extends GameObject {
 
+public class Sprite extends GameObject {
     public Sprite(Texture2D tex){
         texture = EngineController.loadTexture(tex.getSource());
         float wbyh =(float)tex.getWidth() / (float)tex.getHeight(); 
         float hbyw =(float)tex.getHeight() / (float)tex.getWidth() ; 
-    
-        // float [] verteics = {
-        //     -0.5f*wbyh, -0.5f*hbyw, 0f, 0.0f, 0.0f,
-        //     0.5f*wbyh, -0.5f*hbyw, 0f, -1.0f, 0.0f,
-        //     0.5f*wbyh, 0.5f*hbyw, 0f, -1.0f, -1.0f,
-        //     -0.5f*wbyh, 0.5f*hbyw, 0, 0f, -1.0f,
-        // };
         float[] verteics={
             -0.5f*wbyh, -0.5f*hbyw, 0f, 0.0f, 0.0f,
             0.5f*wbyh, -0.5f*hbyw, 0f, -1.0f, 0.0f,
@@ -58,7 +52,7 @@ public class Sprite extends GameObject {
 
         glBindVertexArray(model.getBuffer()[0]);
         glDrawArrays(GL_TRIANGLES, 0, 6);
-        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_2D, texture);
     }
 
 }
