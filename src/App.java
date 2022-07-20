@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
 import org.lwjgl.glfw.GLFW;
@@ -18,6 +19,7 @@ import objects.Sprite;
 import objects.View;
 import objects.Window;
 import utils.Animation;
+import utils.Collision;
 import utils.Color;
 import utils.Frame;
 import utils.Input;
@@ -32,7 +34,7 @@ public class App{
 
     void app(){
 
-        int winWidth = 1900 , winHeight =  1200;
+        int winWidth = 1920 , winHeight =  1280;
         String title = "My title";
         Window window = new Window(winWidth, winHeight, title);
  
@@ -80,9 +82,19 @@ public class App{
         animation.addFrame(new Frame(tex[0], 0.1f));
         animation.addFrame(new Frame(tex[1], 0.25f));
 
-        Sprite sprite = new Sprite(tex[0]);
+        Rectangle sprite = new Rectangle();
+        sprite.transform.position.y = 2;
+        sprite.collision = new Collision(new Vector3f(1,1,1));
+
         ArrayList<Circle> fires = new ArrayList<>();
         ArrayList<Integer> dir = new ArrayList<>();
+
+        Rectangle ground = new Rectangle();
+        ground.transform.scale.x = 4;
+        ground.transform.position.y = -2;
+        ground.collision = new Collision(new Vector3f(4,1,1));
+
+        Time timeOnGround = new Time();
         Time timer = new Time();
             while(!window.isRunning()){
             window.render();
@@ -92,10 +104,15 @@ public class App{
             if(Input.getKeyDown(GLFW.GLFW_KEY_D)){
                 sprite.transform.position.x +=0.1f;
                 sprite.transform.scale.x = -1;
+                
 
             }else if(Input.getKeyDown(GLFW.GLFW_KEY_A)){
                 sprite.transform.position.x -=0.1f;
                 sprite.transform.scale.x = 1;
+            }else if(Input.getKeyDown(GLFW.GLFW_KEY_S)){
+                sprite.transform.position.y -=0.1f;
+            }else if(Input.getKeyDown(GLFW.GLFW_KEY_W)){
+                sprite.transform.position.y +=0.1f;
             }
             else{
                 animation.reset();
@@ -118,9 +135,15 @@ public class App{
             view.render();
             proj.sendMatrix();
 
-            // line.draw();
-
-
+            line.draw();
+            ground.draw();
+            if(Collision.CheckCollision(ground, sprite)  ){
+                ground.color = new Color(0, 255, 0);
+                timeOnGround.restart();
+            }else{
+                sprite.transform.position.y -= 0.1f*timeOnGround.getTime();
+                ground.color = new Color(255, 0, 0);
+            }
             sprite.draw();;
             l.draw();
  

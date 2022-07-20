@@ -5,10 +5,10 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
 
-
 import org.joml.Vector3f;
 
 import Engine.EngineController;
+import utils.Collision;
 import utils.Color;
 import utils.Texture2D;
 import utils.Transform;
@@ -19,7 +19,7 @@ public class GameObject {
     public String name ;
     public Transform transform;
     public Color color;
-
+    public Collision collision;
     public void enableLight(){
         glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "lightOn"),1);
 
@@ -28,8 +28,10 @@ public class GameObject {
         model.setTranslation(transform.position);
         model.setRotationXYZ(transform.rotation.x, transform.rotation.y, transform.rotation.z);
         model.scale(new Vector3f(transform.scale));
-
-
+        if(collision != null ){
+            collision.position.x = transform.position.x - collision.size.x/2;
+            collision.position.y  = transform.position.y - collision.size.y/2;
+        }
         glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "a"),color.a);
         glUniform2f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "colorFromIn"),0,0);
 

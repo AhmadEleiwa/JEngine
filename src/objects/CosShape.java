@@ -20,7 +20,7 @@ public class CosShape extends GameObject {
     
         public void loadVerteces(){
             verteics = new float[edges*5];
-            int c = 360/edges;
+         
             int row = 0;
             for(int i=-edges/2; i<edges/2; i++){
                 verteics[row] = (float)i*0.008f;

@@ -6,8 +6,9 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
+import org.joml.Vector3f;
+
 import Engine.EngineController;
-import utils.Animation;
 import utils.Color;
 import utils.Texture2D;
 import utils.Transform;
@@ -28,11 +29,11 @@ public class Sprite extends GameObject {
             -0.5f*wbyh, -0.5f*hbyw, 0f, 0.0f, 0.0f,
         };
         this.name = tex.getSource();
-
         model = new Mesh(EngineController.pushPorgram("defualt"), "model");
         model.setBuffer(EngineController.pushBuffer(name));
         transform = new Transform();
         color = new Color(220, 220, 220);
+        this.transform.scale = new Vector3f(hbyw, wbyh, 1);
 
         glBindVertexArray(model.getBuffer()[0]);
         glBindBuffer(GL_ARRAY_BUFFER, model.getBuffer()[1]);
