@@ -41,9 +41,9 @@ public class Rectangle extends GameObject{
 
         glVertexAttribPointer(2, 2, GL_FLOAT, false, 5*4,  3 * 4);
         glEnableVertexAttribArray(2); 
-
-
+        
         texture = 0;
+
     }
 
 
@@ -56,5 +56,6 @@ public class Rectangle extends GameObject{
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
+    
 
 }

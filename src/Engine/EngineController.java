@@ -1,6 +1,7 @@
 package Engine;
 import java.util.ArrayList;
 
+import objects.Window;
 import utils.Texture2D;
 
 import static org.lwjgl.opengl.GL20.*;
@@ -12,7 +13,14 @@ public class EngineController {
     private static ArrayList<Texture2D> texture2ds = new ArrayList<>();
     private static ArrayList<ShaderProgram> programs = new ArrayList<>();
     private static ArrayList<Long> windows = new ArrayList<>();
+    private static Window MainWindow;
 
+    public static void initMainWindow(Window win){
+        MainWindow = win;
+    }
+    public static Window geMaintWindow(){
+        return MainWindow;
+    }
 
     public static  void addWindow(long window){
         windows.add(window);

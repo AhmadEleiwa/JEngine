@@ -10,6 +10,7 @@ import org.joml.Vector3f;
 import Engine.EngineController;
 import utils.Collision;
 import utils.Color;
+import utils.Physics;
 import utils.Texture2D;
 import utils.Transform;
 
@@ -20,6 +21,13 @@ public class GameObject {
     public Transform transform;
     public Color color;
     public Collision collision;
+    public Physics physics;
+
+    public static  GameObject create (GameObject gameObject){
+        EngineController.geMaintWindow().add(gameObject);
+        // System.out.println(gameObject.getClass().getSimpleName());
+        return gameObject;
+    }
     public void enableLight(){
         glUniform1f(glGetUniformLocation(EngineController.pushPorgram("defualt"), "lightOn"),1);
 
