@@ -26,6 +26,7 @@ public class Physics{
     }
 
     public float move(float v){
+     
         velocity.x =  (movement * speed) + force.x;
         return v  + velocity.x;
 

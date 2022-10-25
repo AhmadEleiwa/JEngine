@@ -25,7 +25,7 @@ public class Collision {
 
     public static boolean CheckXCollision(GameObject one, GameObject two) // AABB - AABB collision
     {
-        boolean collisionX = one.collision.position.x + one.collision.size.x  >= two.collision.position.x &&
+        boolean collisionX = one.collision.position.x + one.collision.size.x  >= two.collision.position.x  &&
                 two.collision.position.x + two.collision.size.x>= one.collision.position.x ;
         boolean collisionY = one.collision.position.y + one.collision.size.y -0.1f >= two.collision.position.y  &&
                 two.collision.position.y + two.collision.size.y -0.1  >= one.collision.position.y;

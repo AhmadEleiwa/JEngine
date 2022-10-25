@@ -1,5 +1,4 @@
 
-
 import org.lwjgl.glfw.GLFW;
 import org.joml.Vector3f;
 
@@ -8,14 +7,17 @@ import objects.Circle;
 import objects.GameObject;
 import objects.Projection;
 import objects.Rectangle;
+import objects.Sprite;
 import objects.View;
 import objects.Window;
+import utils.Animation;
 import utils.Collision;
 import utils.Color;
+import utils.Frame;
 import utils.Input;
 import utils.Physics;
+import utils.Texture2D;
 import utils.Time;
-
 
 public class App {
     private View view;
@@ -37,6 +39,8 @@ public class App {
     public boolean onGround = false;
 
     Time time;
+    Time timer;
+
 
     Rectangle rect;
     Rectangle ground;
@@ -44,9 +48,9 @@ public class App {
     Rectangle ground2;
     Rectangle ground3;
 
-
     Rectangle enemy;
     Rectangle circle;
+    Sprite sword;
 
     public static void main(String[] args) {
         new App().app();
@@ -77,33 +81,28 @@ public class App {
 
         ground2 = (Rectangle) GameObject.create(new Rectangle());
         floor = (Rectangle) GameObject.create(new Rectangle());
-        enemy = (Rectangle) GameObject.create(new Rectangle());
-        circle = (Rectangle ) GameObject.create(new Rectangle());
-        circle.transform.scale = new Vector3f(0.5f,0.5f, 1);
+
+        sword = (Sprite) GameObject.create(new Sprite(new Texture2D("assets/sword.png")));
+
+        sword.setDisplay(false);
+
         floor.transform.position = new Vector3f(3, 1, 0);
         floor.transform.scale.x = 2;
         ground.transform.position.y = -1;
         ground.transform.scale.x = 10;
-    
 
         ground2.transform.position.y = 2;
         ground2.transform.position.x = -1;
         ground2.transform.scale.x = 2;
-        enemy.transform.position.x = -2;
-        circle.collision = new Collision(new Vector3f(0.5f, 0.5f, 0));
-        enemy.collision = new Collision(new Vector3f(1f, 1f, 0));
         rect.collision = new Collision(new Vector3f(1f, 1f, 0));
         floor.collision = new Collision(new Vector3f(2f, 1f, 0));
         ground.collision = new Collision(new Vector3f(10f, 1f, 0));
-
 
         ground2.collision = new Collision(new Vector3f(2f, 1f, 0));
         ground2.loadTexture("assets/platform.png");
         floor.loadTexture("assets/platform.png");
         ground.loadTexture("assets/platform.png");
-
-   
-  
+        rect.loadTexture("assets/player.png");
 
     }
 
@@ -118,11 +117,13 @@ public class App {
         time = new Time();
         isTouch = false;
         rect.physics = new Physics();
-        enemy.physics = new Physics();
-        circle.physics = new Physics();
+        ;
         // circle.physics.gravity = 0;
-    
+
         window.runRenderQueue(view.cameraPos, 3);
+        boolean swordOn = false;
+        timer = new Time();
+        sword.transform.scale.y = 0.8f;
         while (!window.isRunning()) {
             window.render();
             EngineController.useDefualtProgram();
@@ -132,39 +133,49 @@ public class App {
             proj.sendMatrix();
 
             if (Input.getKeyDown(GLFW.GLFW_KEY_D)) {
-                rect.physics.movement = movement = 1;
-
+                rect.physics.movement = 1;
+                rect.physics.dir = 1;
+                rect.transform.scale.x = 1;
+                sword.transform.scale.x = -0.8f;
 
             } else if (Input.getKeyDown(GLFW.GLFW_KEY_A)) {
-                rect.physics.movement = movement = -1;
-        
+                rect.physics.movement = -1;
+                rect.physics.dir = -1;
+
+                rect.transform.scale.x = -1;
+                sword.transform.scale.x = 0.8f;
+
             } else
                 rect.physics.movement = 0;
-
-            if (Input.getKeyDown(GLFW.GLFW_KEY_RIGHT)) {
-                enemy.physics.movement  = 1;
-
-            } else if (Input.getKeyDown(GLFW.GLFW_KEY_LEFT)) {
-                enemy.physics.movement  = -1;
-
-            } else
-                enemy.physics.movement = 0;
 
             if (Input.getKeyDown(GLFW.GLFW_KEY_SPACE) && rect.physics.onGround) {
                 rect.physics.onGround();
             }
 
+
             if (rect.transform.position.y > view.cameraPos.y + 4) {
                 view.cameraPos.y = rect.transform.position.y;
             }
             if (rect.transform.position.y < view.cameraPos.y - 4) {
-                view.cameraPos.y = rect.transform.position.y;;
-
+                view.cameraPos.y = rect.transform.position.y;
             }
-            if(Input.getKeyDown(GLFW.GLFW_KEY_F)){
-
-                circle.physics.movement = -2;
+            if (Input.getKeyDown(GLFW.GLFW_KEY_F) && swordOn == false) {
+                time.restart();
+                swordOn = true;
+                sword.transform.rotation.z = 0.4f * rect.physics.dir;
+                sword.setDisplay(true);
             }
+            if (time.setTimer(0.08) != 0 && swordOn) {
+                sword.transform.rotation.z += 0.4f * sword.transform.scale.x;
+
+            } else {
+                sword.setDisplay(false);
+                swordOn = false;
+            }
+
+            sword.transform.position = new Vector3f(rect.transform.position.x + rect.physics.dir * 0.7f,
+                    rect.transform.position.y - 0.05f, 0);
+
             view.cameraPos.x = rect.transform.position.x;
 
             window.renderAll();

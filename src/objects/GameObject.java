@@ -22,6 +22,7 @@ public class GameObject {
     public Color color;
     public Collision collision;
     public Physics physics;
+    private boolean display = true;
 
     public static  GameObject create (GameObject gameObject){
         EngineController.geMaintWindow().add(gameObject);
@@ -67,6 +68,13 @@ public class GameObject {
 
     public void draw(){
 
+    }
+
+    public void setDisplay(boolean state){
+        display = state;
+    }
+    public boolean display(){
+        return display;
     }
 
 }

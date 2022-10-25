@@ -5,6 +5,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWCursorPosCallbackI;
@@ -29,9 +30,10 @@ public class Window {
     private ArrayList<GameObject> Objs;
     private Thread thread;
     private Vector3f renderPos = new Vector3f();
-    ArrayList<Integer> unrendering = new ArrayList<>();
     private int renderRange = 10;
-    ArrayList<Integer> renderingObjects = new ArrayList<>();
+    private ArrayList<Integer> unrendering = new ArrayList<>();
+    private ArrayList<Integer> renderingObjects = new ArrayList<>();
+    private ArrayList<Integer> undisplay = new ArrayList<>();
 
     public Window(int width, int height, String title) {
         if (!glfwInit()) {
@@ -178,12 +180,17 @@ public class Window {
         this.Objs.add(gameObject);
     }
 
+    public void remove(int index) {
+        this.Objs.remove(index);
+    }
+
     private void checkCollision(GameObject target, int index) {
         if (target.physics == null)
             return;
         if (target.physics.onGround) {
             target.physics.jumbEnable = 0;
         }
+
         for (int i = 0; i < Objs.size(); i++) {
             GameObject g = Objs.get(i);
             if (g.collision == null || i == index)
@@ -198,36 +205,15 @@ public class Window {
                 target.physics.time.restart();
 
             }
-            boolean c = false;
-            if (Collision.CheckRightCollision(target, g)) {
-                if (g.physics != null) {
-                    g.physics.force.x = (target.physics.speed * target.physics.movement);
-                    c = true;
 
-                } else if (target.physics.movement == 1) {
+            if (Collision.CheckLeftCollision(target, g)) {
+                if (target.physics.movement == -1) {
                     target.physics.movement = 0;
                 }
-
-            } else if (Collision.CheckLeftCollision(target, g)) {
-                if (g.physics != null) {
-                    g.physics.force.x = (target.physics.speed * target.physics.movement);
-                    c = true;
-
-                } else if (target.physics.movement == -1) {
+            } else if (Collision.CheckRightCollision(target, g)) {
+                if (target.physics.movement == 1) {
                     target.physics.movement = 0;
                 }
-
-            } else {
-                if (g.physics != null) {
-                    g.physics.force.x = 0;
-                    target.physics.force.x = 0;
-
-                }
-            }
-            if (c == false && g.physics != null) {
-                g.physics.force.x = 0;
-                target.physics.force.x = 0;
-
             }
 
         }
@@ -263,15 +249,19 @@ public class Window {
 
     public void renderAll() {
         for (int i = 0; i < Objs.size(); i++) {
-            checkCollision(Objs.get(i), i);
-            this.Objs.get(i).draw();
+            if (Objs.get(i).display() == true) {
+                checkCollision(Objs.get(i), i);
+                Objs.get(i).draw();
+            }
         }
     }
 
     public void renderAll(Vector3f pos, int range) {
         for (int i = 0; i < renderingObjects.size(); i++) {
-            checkCollision(this.Objs.get(renderingObjects.get(i)), i);
-            this.Objs.get(renderingObjects.get(i)).draw();
+            if (Objs.get(renderingObjects.get(i)).display()) {
+                checkCollision(this.Objs.get(renderingObjects.get(i)), i);
+                this.Objs.get(renderingObjects.get(i)).draw();
+            }
         }
         try {
             System.out.println(renderingObjects.size());
