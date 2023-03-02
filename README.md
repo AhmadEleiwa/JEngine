@@ -76,5 +76,5 @@ public class FirstLook{
 }
 ```
 <div align='center'>
-<img src='images/firstapp.png'  style='width:50%;'/>
+<img src='images/firstapp.png'  style='width:70%;'/>
 </div>
