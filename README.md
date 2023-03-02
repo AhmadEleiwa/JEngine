@@ -13,5 +13,5 @@ The most challenge I faced is that's the OpenGL is so hard to learn and the lag 
 
 ## how to use & requirements 
 First of all, the project must run in vs code with these extenstions:
-1. project manager for java extenstins 
-2. java extenstins 
+1. project manager for java Extension. 
+2. java Extension. 
