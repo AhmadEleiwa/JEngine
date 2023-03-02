@@ -29,7 +29,7 @@ after that it need to run the main method normally.
 
 ### Window
 
-Window objects is for creating instance of Window class. The window is what the user can see from rendering objects. So all objects we wont to see them wiith shown in this Window.
+Window objects is for creating instance of Window class. The window is what the user can see from rendering objects. So all objects we want to see are shown in this Window.
 
 ```java
 Window(width, height, title)
@@ -49,8 +49,29 @@ window.getHeight(); // return height of window
 window.getWidth(); // return width of window
 window.getTitle(); // return title of window
 window.getWindow(); // return id of this window
-window.isRunning(); // check whatever the window still running or not
+window.isRunning(); // check whatever the window still running or not (true if not running)
 window.pollEvent(); // check the evnets & rerender the window
 window.setCursorHidden(); // set the cursor hidden (unshown)
 window.disabledCursor(); // disabled the window
+window.render() // to render the window
+```
+
+lets now try our first app
+
+```java
+import objects.Window;
+import utils.Color;
+
+public class FirstLook{
+    static Window window;
+    public static void main(String[] args) {
+        window= new Window(1280, 720, "First App");
+        window.setBackGroundColor(new Color(100,100,100));
+        while(!window.isRunning()){
+            window.render();
+            // our code here
+            window.pollEvent();
+        }
+    }
+}
 ```
