@@ -78,5 +78,5 @@ public class FirstLook{
 **RESULT:**
 
 <div align='center'>
-<img src='images/firstapp.png'  style='width:80%;'/>
+<img src='images/firstapp.png'  style='width:90%;'/>
 </div>
