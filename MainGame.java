@@ -93,6 +93,8 @@ public class MainGame {
         player.loadTexture("assets/player.png");
 
         player.transform.position.y = 1;
+        player.transform.position.x = 1;
+
 
         player.physics = new Physics();
 
