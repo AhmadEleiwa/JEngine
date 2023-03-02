@@ -75,6 +75,5 @@ public class FirstLook{
     }
 }
 ```
-<div align='center'>
-    <img src='images/firstapp.png' />
-</div>
+
+<img src='images/firstapp.png' />
