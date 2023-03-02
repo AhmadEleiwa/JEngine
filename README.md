@@ -75,7 +75,7 @@ public class FirstLook{
     }
 }
 ```
-**RESULT**
+**RESULT:**
 
 <div align='center'>
 <img src='images/firstapp.png'  style='width:70%;'/>
