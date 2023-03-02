@@ -16,4 +16,4 @@ First of all, the project must run in vs code with these extensions:
 1. project manager for java. 
 2. java.
 
-after that it need run the main method normally.
+after that it need to run the main method normally.
