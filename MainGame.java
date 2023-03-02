@@ -3,7 +3,10 @@ import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 
 import Engine.EngineController;
+import objects.Cube;
 import objects.GameObject;
+import objects.Light;
+import objects.Lines;
 import objects.Projection;
 import objects.Rectangle;
 import objects.View;
@@ -30,7 +33,11 @@ public class MainGame {
     public Rectangle[][] ground;
     public int[] map;
 
+    public Cube block;
+    public Cube block2;
 
+    public Light light;
+    public Lines l;
     public Time colTimmer;
 
     private void genMap() {
@@ -58,47 +65,58 @@ public class MainGame {
         camera.cameraPos.z = 12;
         projection = new Projection((float)width/(float)height);
         player = new Rectangle();
-
+        block = new Cube();
+        block2 = new Cube();
         ground = new Rectangle[150][6];
-        
+        l = new Lines();
+        light = new Light();
+        GameObject.create(light);
+        GameObject.create(l);
    
 
-        genMap();
+        // genMap();
 
+        light.transform.position.y = 5;
+        light.transform.position.x = 5;
+        light.transform.position.z = 5;
 
         timer = new Time();
    
         colTimmer = new Time();
 
-        GameObject.create((Rectangle)player);
+        // GameObject.create((Rectangle)player);
 
 
 
-        for(int i=0; i<ground.length; i++){
-            for(int j =0; j<ground[i].length; j++){
-                ground[i][j] = new Rectangle();
-                ground[i][j].collision = new Collision(new Vector3f(1,1,0));
-                ground[i][j].transform.position = new Vector3f(i, map[i]-j ,0);
-                ground[i][j].loadTexture("assets/dirt.png");
+        // for(int i=0; i<ground.length; i++){
+        //     for(int j =0; j<ground[i].length; j++){
+        //         ground[i][j] = new Rectangle();
+        //         ground[i][j].collision = new Collision(new Vector3f(1,1,0));
+        //         ground[i][j].transform.position = new Vector3f(i, map[i]-j ,0);
+        //         ground[i][j].loadTexture("assets/dirt.png");
 
-                GameObject.create((Rectangle)ground[i][j]);
-            }
-        }
+        //         GameObject.create((Rectangle)ground[i][j]);
+        //     }
+        // }
         
+        GameObject.create(block);
+        GameObject.create(block2);
+        block.color = new Color(236, 242, 255);
+        block2.transform.position.y = 1;
+        block2.color = new Color(63, 84, 172);
+        block.transform.scale= new Vector3f(10,1,10);
 
-
-
-        player.collision = new Collision(new Vector3f(1,1,0));
+        // player.collision = new Collision(new Vector3f(1,1,0));
      
-        player.loadTexture("assets/player.png");
+        // player.loadTexture("assets/player.png");
 
-        player.transform.position.y = 1;
-        player.transform.position.x = 1;
+        // player.transform.position.y = 1;
+        // player.transform.position.x = 1;
 
 
-        player.physics = new Physics();
+        // player.physics = new Physics();
 
-        player.physics.dir = 1;
+        // player.physics.dir = 1;
 
 
 
@@ -124,33 +142,34 @@ public class MainGame {
     }
 
     public void run() {
-        window.runRenderQueue(camera.cameraPos, 10);
-
+        // window.runRenderQueue(camera.cameraPos, 10);
+        window.disabledCursor();
+        camera.setCameraIoMovement(true);
         while (!window.isRunning()) {
 
             window.render();
             EngineController.useDefualtProgram();
 
-            controls();
+            // controls();
 
-            if (player.transform.position.x > camera.cameraPos.x + 4) {
-                timer.restart();
-                dir = 1;
-            }
-            if (player.transform.position.x < camera.cameraPos.x - 4) {
-                timer.restart();
-                dir = -1;
+            // if (player.transform.position.x > camera.cameraPos.x + 4) {
+            //     timer.restart();
+            //     dir = 1;
+            // }
+            // if (player.transform.position.x < camera.cameraPos.x - 4) {
+            //     timer.restart();
+            //     dir = -1;
 
-            }
-            player.transform.scale.x = player.physics.dir;
-            if (timer.setTimer(1.5) != 0 && player.transform.position.x != camera.cameraPos.x) {
-                camera.cameraPos.x += (timer.setTimer(1.5) / 30) * dir * 2f;
-            }
+            // }
+            // player.transform.scale.x = player.physics.dir;
+            // if (timer.setTimer(1.5) != 0 && player.transform.position.x != camera.cameraPos.x) {
+            //     camera.cameraPos.x += (timer.setTimer(1.5) / 30) * dir * 2f;
+            // }
 
  
 
             camera.render();
-            window.renderAll(camera.cameraPos, 8);
+            window.renderAll();
             projection.sendMatrix();
             window.pollEvent();
         }
