@@ -6,5 +6,6 @@ Java is one of the best & fastest programming languages. So, no wonder to use it
 ## Why Game Engine
 So the question is why we should use the game engine if the OpenGL is better and faster? The answer is so simple. That's because the OpenGL hard to learn and hard to write code. The OpenGL uses built-in functions that tells the CPU what to do, and to write code from scratch is a waste of time. For this we use OOP to make it more easier. And OpenGL needs a strong understanding of Math and pyshics.
 
-
+## Challenges 
+The most challenge I faced is that's the OpenGL is so hard to learn and the lag of good resources. during my shearching i found a book called Learn OpenGl- Grapics by joey de Vries. it realy good and so clear to read.
 
