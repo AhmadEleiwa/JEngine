@@ -11,3 +11,7 @@ So the question is why we should use the game engine if the OpenGL is better and
 ## Challenges 
 The most challenge I faced is that's the OpenGL is so hard to learn and the lag of good resources. during my shearching i found a book called Learn OpenGl- Grapics by joey de Vries. it realy good and was clear.
 
+## how to use & requirements 
+First of all, the project must run in vs code with these extenstions:
+1.project manager for java extenstins 
+2.java extenstins 
