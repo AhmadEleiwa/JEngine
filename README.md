@@ -1,1 +1,2 @@
-# Game Engine using
+# JEngine
+By Using java & OpenGL, I create a basic game engine. This engine has the standard basic functionalities to be a GameEngine. The engine provides several services like basic 2d objects, cube, lighting, camera view, window object, Time,  animation, load textures, transformations, basic physics and collision detection. Also, it has a MainController to control all of these components with each others. 
