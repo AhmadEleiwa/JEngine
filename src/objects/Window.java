@@ -198,21 +198,28 @@ public class Window {
             if (Collision.CheckBottomCollision(target, g)) {
 
                 target.physics.jumbEnable = 0;
+       
+
 
             } else if (Collision.CheckYCollision(target, g)) {
                 target.physics.onGround = true;
 
                 target.physics.time.restart();
 
+
+
             }
 
             if (Collision.CheckLeftCollision(target, g)) {
-                if (target.physics.movement == -1) {
+                if (target.physics.movement < 0) {
                     target.physics.movement = 0;
+ 
+
                 }
             } else if (Collision.CheckRightCollision(target, g)) {
-                if (target.physics.movement == 1) {
+                if (target.physics.movement >0) {
                     target.physics.movement = 0;
+               
                 }
             }
 
@@ -234,7 +241,7 @@ public class Window {
                 for (int i = 0; i < Objs.size(); i++) {
                     if ((Objs.get(i).transform.position.x < renderPos.x + renderRange
                             && Objs.get(i).transform.position.x > renderPos.x - renderRange)
-                            || (Objs.get(i).transform.position.y < renderPos.x + renderRange
+                            && (Objs.get(i).transform.position.y < renderPos.y + renderRange
                                     && Objs.get(i).transform.position.y > renderPos.y - renderRange)) {
                         unrendering.add(i);
 
@@ -258,13 +265,13 @@ public class Window {
 
     public void renderAll(Vector3f pos, int range) {
         for (int i = 0; i < renderingObjects.size(); i++) {
-            if (Objs.get(renderingObjects.get(i)).display()) {
+            if (Objs.get(renderingObjects.get(i)).display() == true) {
                 checkCollision(this.Objs.get(renderingObjects.get(i)), i);
                 this.Objs.get(renderingObjects.get(i)).draw();
             }
         }
         try {
-            System.out.println(renderingObjects.size());
+            // System.out.println(renderingObjects.size());
             renderPos = new Vector3f(pos);
             renderRange = range;
             if (!thread.isAlive()) {
