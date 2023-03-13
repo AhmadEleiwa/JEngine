@@ -120,7 +120,7 @@ public class SecondApp{
         window= new Window(1280, 720, "First App");
         window.setBackGroundColor(new Color(100,100,100));
         View camera =new View();
-        Projection projection =  new Projection(720.f/800.f);
+        Projection projection =  new Projection(1280.f/720.f);
         Rectangle rect = new Rectangle();
         while(!window.isRunning()){
             window.render();
@@ -136,3 +136,6 @@ public class SecondApp{
     }
 }
 ```
+<div align='center'>
+    <img src='assets/second app.png' />
+</div>
