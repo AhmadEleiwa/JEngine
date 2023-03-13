@@ -94,11 +94,45 @@ view.mouseSpeed; // float varible to control the mouse speed
 
 ```
 ### Projection
-The projection describes how the object will represent in the view. Also it's the ratio of the width and the hieght of the window
+The projection describes how the object will represent in the view. Also it's the ratio of the width and the hieght of the window.
 <div align='center'>
 <img src='assets/projection.jpg' />
 </div>
 
 ```java
 Projection((float)width/(float)height)
+```
+
+**Second App**
+```java
+import objects.Window;
+import objects.View;
+import objects.Projection;
+import Engine.EngineController;
+import objects.Rectangle;
+
+
+import utils.Color;
+
+public class SecondApp{
+    static Window window;
+    public static void main(String[] args) {
+        window= new Window(1280, 720, "First App");
+        window.setBackGroundColor(new Color(100,100,100));
+        View camera =new View();
+        Projection projection =  new Projection(720.f/800.f);
+        Rectangle rect = new Rectangle();
+        while(!window.isRunning()){
+            window.render();
+            EngineController.useDefualtProgram();
+            
+            rect.draw();
+
+            camera.render();
+            projection.sendMatrix();
+            window.pollEvent();
+        }
+
+    }
+}
 ```
