@@ -80,3 +80,25 @@ public class FirstLook{
 <div align='center'>
     <img src='images/firstapp.png'  style='width:100%;'/>
 </div>
+
+### View
+The view object is a camera view. The camera is a window to let you view the global world and its objects. 
+
+```java
+view.render() // to let the camera works 
+view.cameraPos() // the current position of the camera in XYZ 
+view.isCameraIoMovement() // check whatever the camera in IO movement mode or not
+view.setCameraIoMovement(boolean); // to set if the camera in IO mode or not. IO mode mean make the camera controlled by the mouse 
+view.sensitivity; // vector2f for control the sensitivity of the mousein x and y axis 
+view.mouseSpeed; // float varible to control the mouse speed
+
+```
+### Projection
+The projection describes how the object will represent in the view. Also it's the ratio of the width and the hieght of the window
+<div align='center'>
+<img src='assets/projection.jpg' />
+</div>
+
+```java
+Projection((float)width/(float)height)
+```
