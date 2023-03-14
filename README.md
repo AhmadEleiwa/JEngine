@@ -52,7 +52,7 @@ window.getWindow(); // return id of this window
 window.isRunning(); // check whatever the window still running or not (true if not running)
 window.pollEvent(); // check the evnets & rerender the window
 window.setCursorHidden(); // set the cursor hidden (unshown)
-window.disabledCursor(); // disabled the window
+window.disabledCursor(); // disabled the cursor
 window.render() // to render the window
 ```
 
