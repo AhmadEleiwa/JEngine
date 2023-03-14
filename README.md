@@ -215,7 +215,7 @@ CheckBottomCollision(GameObject one, GameObject two)
 ```
 
 ## Exmples
-### working rotation
+### working on rotation
 ```java
 import objects.Window;
 import objects.View;
