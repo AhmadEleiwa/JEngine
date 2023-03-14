@@ -279,5 +279,5 @@ public class RoationApp {
 ```
 
 **output**
-<img src='assets/rotation.gif' />
+<img src='assets/rotation.mp4' />
 <video src='assets/rotation.mp4'  width='100%' ></video>
