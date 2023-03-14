@@ -187,7 +187,7 @@ Time time = new Time();
 ```java
 time.retart() // reset timer. take the new initial time 
 time.getTime() // return the time in second
-time.setTimer(float) // to set a timer 
+time.setTimer(t) // to set a timer 
 Time.deltaTime() // static method to return the current time
 
 ```
