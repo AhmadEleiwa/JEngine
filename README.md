@@ -165,4 +165,30 @@ GameObject.create(gameobject); // This static method to  make reference for Main
 ```
 
 
-#### Rectangle
+## Utilities 
+
+### Input 
+Input class allow you to use IO inputs from keybaord and mouse. It take a GLFW keys as parameter 
+```java
+Input.getKeyDown();
+Input.getKeyUp();
+Input.getMouseButtonDown();
+Input.getMouseButtonUp();
+Input.getMouse();
+
+```
+### Time 
+Time input is imporatant in Game Egnines for several functionalities. such as animation, delay , counte or even a timer. the Time object store the current time in seconds. 
+```java
+Time time = new Time();
+```
+**Time methods**
+
+```java
+time.retart() // reset timer. take the new initial time 
+time.getTime() // return the time in second
+time.setTimer(float) // to set a timer 
+Time.deltaTime() // static method to return the current time
+
+```
+### Transform
