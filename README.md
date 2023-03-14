@@ -280,4 +280,6 @@ public class RoationApp {
 
 **output**
 <img src='assets/rotation.gif' />
-<video src='assets/rotatiob rects.mp4'  />
+<video >
+    <source src='assets/rotatiob rects.mp4' />
+</video>
