@@ -142,3 +142,27 @@ public class SecondApp{
 <div align='center'>
     <img src='assets/second app.png' />
 </div>
+
+
+### GameObject
+GameObject is the parent of all objects witch could be render in the window.
+
+```java
+    gameObject.collision; // collision border of this object, its equal null by defualt
+    gameObject.color; // to control the color og the object
+    gameObject.name; // object name
+    gameObject.physics; // this prorpity for control the physics effect to the object (gravity, forces, movmentSpeed)
+    gameObject.transform; // the trnaformation of the object (scale, position, rotation, size)
+    gameObject.draw(); // to draw the object in the screen
+    gameObject.display(); // to check whatever the object are shown or not
+    gameObject.setDisplay(false); // to set the visablity of the object 
+    gameObject.enableLight(); // enable the lighting on this objec ? works only on 3D objects 
+    gameObject.loadTexture(); // to load texture foe the object (string , Texture2D)
+
+    GameObject.create(gameobject); // This static method to  make reference for MainController 
+    //to controll this object, this operation allow to control objects physics and objects collision between all objects.
+
+```
+
+
+#### Rectangle
