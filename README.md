@@ -197,7 +197,8 @@ Transform is the tranformation of object from scaling, position and rotation. Th
 ### Color 
 Color is an class contains 3 values **RGB**, range of the RGB color from 1 to 255 
 ```java
-Color(RED, GREEN, BLUE)
+Color(RED, GREEN, BLUE);
+Color(RED, GREEN, BLUE, ALPHA);
 ```
 ### Collision 
 The collision class allow you to create collision border. in addition, it detect the collision 
@@ -211,4 +212,68 @@ CheckRightCollision(GameObject one, GameObject two) ;
 CheckLeftCollision(GameObject one, GameObject two) ;
 CheckYCollision(GameObject one, GameObject two);
 CheckBottomCollision(GameObject one, GameObject two) 
+```
+
+## Exmples
+### working rotation
+```java
+import objects.Window;
+import objects.View;
+import objects.Projection;
+
+import org.joml.Vector3f;
+
+import Engine.EngineController;
+import objects.Rectangle;
+
+import objects.GameObject;
+import utils.Color;
+import utils.Time;
+
+public class RoationApp {
+    static Window window;
+    public static void main(String[] args) {
+        window= new Window(1280, 720, "First App");
+        window.setBackGroundColor(new Color(100,100,100));
+        EngineController.initMainWindow(window);
+        // to tell the engine what window that it work on it
+
+        View camera =new View();
+        Projection projection =  new Projection(1280.f/720.f);
+        Rectangle rect = new Rectangle();
+        Rectangle rect2 = new Rectangle();
+
+        rect2.transform.position.z = -1;
+        rect2.transform.position.x = 1f;
+
+        rect.color = new Color(0,0,255);
+        rect2.color = new Color(0,255,0);
+
+
+
+        GameObject.create(rect);
+        GameObject.create(rect2);
+        Rectangle rect3 = (Rectangle)GameObject.create(new Rectangle());
+        rect3.color = new Color(255,0,0);
+
+
+        rect3.transform.position = new Vector3f(1,1,-2);
+        while(!window.isRunning()){
+            window.render();
+            EngineController.useDefualtProgram();
+    
+
+            rect.transform.rotation.y = (float)Time.deltaTime() ; 
+            rect2.transform.rotation.x = (float)Time.deltaTime() ; 
+            rect3.transform.rotation.z = (float)Time.deltaTime();
+
+        
+            camera.render();
+            projection.sendMatrix();
+            window.renderAll();
+            window.pollEvent();
+        }
+
+    }
+}
 ```
