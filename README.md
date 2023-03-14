@@ -282,3 +282,82 @@ public class RoationApp {
 <div align="center">
     <img src='assets/rotation.gif' />
 </div>
+
+
+### Mini 2D player game
+```java
+import objects.Window;
+import objects.View;
+import objects.Projection;
+
+import org.lwjgl.glfw.GLFW;
+
+import Engine.EngineController;
+import objects.Rectangle;
+
+import objects.GameObject;
+import utils.Collision;
+import utils.Color;
+import utils.Input;
+import utils.Physics;
+
+
+public class MiniGame {
+    static Window window;
+    public static void main(String[] args) {
+        window= new Window(1280, 720, "Game#3");
+        window.setBackGroundColor(new Color(60,80,200));
+        EngineController.initMainWindow(window);
+        // to tell the engine what window that it work on it
+
+        View camera =new View();
+        camera.cameraPos.z = 10;
+        Projection projection =  new Projection(1280.f/720.f);
+
+        Rectangle grounds[] = new Rectangle[4];
+
+        for(int i=0; i<grounds.length; i++){
+            grounds[i] = (Rectangle)GameObject.create(new Rectangle());
+            grounds[i].transform.position.x = i; 
+            grounds[i].collision = new Collision(grounds[i].transform.size);
+            grounds[i].loadTexture("assets/grass.png");
+        }
+        grounds[3].transform.position.y = 1;
+
+        Rectangle player = (Rectangle)GameObject.create(new Rectangle());
+        player.collision = new Collision(player.transform.size);
+        player.physics = new Physics();
+        player.loadTexture("assets/player.png");
+        player.transform.position.y = 2;    
+
+        while(!window.isRunning()){
+            window.render();
+            EngineController.useDefualtProgram();
+
+            if(Input.getKeyDown(GLFW.GLFW_KEY_D)){
+                player.physics.movement = 1;
+            }else if (Input.getKeyDown(GLFW.GLFW_KEY_A)){
+                player.physics.movement = -1;
+            }
+            else{
+                player.physics.movement = 0;
+            }
+            if(Input.getKeyDown(GLFW.GLFW_KEY_SPACE)&& player.physics.onGround){
+                player.physics.jumb();
+            }
+            camera.cameraPos.x = player.transform.position.x;
+
+            camera.render();
+            window.renderAll();
+            projection.sendMatrix();
+            window.pollEvent();
+        }
+
+    }
+}
+```
+
+**output**
+<div align="center">
+    <img src='assets/player.gif' />
+</div>
