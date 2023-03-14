@@ -280,7 +280,7 @@ public class RoationApp {
 
 **output**
 <div align="center">
-    <img src='assets/rotation.gif' />
+    <img src='assets/rotation.gif' width='100%' />
 </div>
 
 
