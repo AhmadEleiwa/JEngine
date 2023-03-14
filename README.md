@@ -236,7 +236,7 @@ public class RoationApp {
         window= new Window(1280, 720, "First App");
         window.setBackGroundColor(new Color(100,100,100));
         EngineController.initMainWindow(window);
-        // to tell the engine what window that it work on it
+        // to tell the engine what window will be working
 
         View camera =new View();
         Projection projection =  new Projection(1280.f/720.f);
