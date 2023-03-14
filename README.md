@@ -277,3 +277,7 @@ public class RoationApp {
     }
 }
 ```
+
+**output**
+<img src='assets/rotation.gif' />
+<video src='assets/rotatiob rects.mp4'  />
