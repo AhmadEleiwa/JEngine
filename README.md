@@ -192,3 +192,23 @@ Time.deltaTime() // static method to return the current time
 
 ```
 ### Transform
+Transform is the tranformation of object from scaling, position and rotation. This class contains 4 main Vectors scale , position, rotation and size.
+
+### Color 
+Color is an class contains 3 values **RGB**, range of the RGB color from 1 to 255 
+```java
+Color(RED, GREEN, BLUE)
+```
+### Collision 
+The collision class allow you to create collision border. in addition, it detect the collision 
+```java
+Collision(Vector3f size);
+```
+```java
+CheckCollision(GameObject one, GameObject two) ;
+CheckXCollision(GameObject one, GameObject two) ;
+CheckRightCollision(GameObject one, GameObject two) ;
+CheckLeftCollision(GameObject one, GameObject two) ;
+CheckYCollision(GameObject one, GameObject two);
+CheckBottomCollision(GameObject one, GameObject two) 
+```
