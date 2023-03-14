@@ -359,5 +359,5 @@ public class MiniGame {
 
 **output**
 <div align="center">
-    <img src='assets/player.gif' />
+    <img src='assets/player.gif' width='100%' />
 </div>
